@@ -12,9 +12,12 @@ def save_data_helper(videos):
         json.dump(videos, file)
 
 def list_videos(videos):
+    print("\n")
+    print('*'*70)
     for index, video in enumerate(videos, start=1):
-        print(f"{index}. ") 
-
+        print(f"{index}.{video['name']},Duration: {video['time']}")
+    print("\n")
+    print('*'*70)    
 
 def add_videos(videos):
     name=input("enter video name: ")
@@ -22,9 +25,24 @@ def add_videos(videos):
     videos.append({"name": name, "time": time})
     save_data_helper(videos)
 def update_video(videos):
-    pass
+    list_videos(videos)
+    index=int(input("enter video index to update: "))
+    if 1 <= index <= len(videos):
+        name=input("enter new video name: ")
+        time=input("enter new video time: ")
+        videos[index-1]={"name": name, "time": time}
+        save_data_helper(videos)
+    else:
+        print("Invalid index. Please try again.")    
 def remove_video(videos):
-    pass
+    list_videos(videos)
+    index=int(input("enter video index to remove: "))
+    if 1 <= index <= len(videos):
+        del videos[index-1]
+        save_data_helper(videos)
+    else:
+        print("Invalid index. Please try again.")
+
 def main():
     videos = load_data()
     while True:
@@ -35,7 +53,7 @@ def main():
         print("4. Remove video")
         print("5. Exit")
         choice=input("Enter your choice: ")
-        print(videos)
+       
 
         match choice:
             case "1":  
