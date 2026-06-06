@@ -1,6 +1,6 @@
 import requests
 def fetch_random_user():
-    url = "https://api.freeapi.app/api/v1/public/randomproducts"
+    url = "https://api.freeapi.app/api/v1/public/randomusers/user/random"
     response = requests.get(url)
     data = response.json()
     if data["success"] and "data" in data:
@@ -10,3 +10,15 @@ def fetch_random_user():
         return user_name, location
     else:
         raise Exception("Failed to fetch user data")
+
+
+def main():
+    try:
+        user_name, location = fetch_random_user()
+        print(f"User: {user_name} \n Location: {location}")
+    except Exception as e:
+        print(str(e))
+
+ 
+if __name__  == "__main__":
+     main()
